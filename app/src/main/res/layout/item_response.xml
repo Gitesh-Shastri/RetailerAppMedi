@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/border"
+    android:padding="10dp"
+    android:id="@+id/pharmacy_response"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:textSize="11dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Distributor"
+        android:layout_marginRight="36dp"
+        android:id="@+id/pdist"
+        />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/pdist"
+        android:textColor="@color/colorAccent"
+        android:text="Ease of order taking "
+        android:id="@+id/porder1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/pdist"
+        android:layout_toRightOf="@+id/porder1"
+        android:textColor="@color/colorAccent"
+        android:text=" : "
+        android:id="@+id/porder"
+        />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/porder"
+        android:textColor="@color/colorAccent"
+        android:text="Timely Delivery "
+        android:id="@+id/pdelivery1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pdelivery1"
+        android:layout_below="@+id/porder"
+        android:textSize="10dp"
+        android:textColor="@color/colorAccent"
+        android:text=" : "
+        android:id="@+id/pdelivery"
+        />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/pdelivery"
+        android:text="Bounce % [Product mismatch / damage] "
+        android:id="@+id/pbounce1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/pdelivery"
+        android:layout_toRightOf="@+id/pbounce1"
+        android:textColor="@color/colorAccent"
+        android:text=" : "
+        android:id="@+id/pbounce"
+        />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@id/pbounce"
+        android:textColor="@color/colorAccent"
+        android:text="Payment terms [Discount %, Credit Period] "
+        android:id="@+id/ppayment1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@id/pbounce"
+        android:layout_toRightOf="@id/ppayment1"
+        android:textColor="@color/colorAccent"
+        android:text=" : "
+        android:id="@+id/ppayment"
+        />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/ppayment"
+        android:textColor="@color/colorAccent"
+        android:text="Return Policy [Sales / Expiry Returns] "
+        android:id="@+id/preturn1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/ppayment"
+        android:layout_toRightOf="@id/preturn1"
+        android:textColor="@color/colorAccent"
+        android:text=" : "
+        android:id="@+id/preturn"
+        />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/preturn"
+        android:textColor="@color/colorAccent"
+        android:text="Behaviour of Salesman / Delivery man "
+        android:id="@+id/pbeahviour1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_toRightOf="@id/pbeahviour1"
+        android:layout_below="@id/preturn1"
+        android:textColor="@color/colorAccent"
+        android:text=" : "
+        android:id="@+id/pbeahviour"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/pbeahviour"
+        android:background="@color/colorAccent"
+        />
+</RelativeLayout>

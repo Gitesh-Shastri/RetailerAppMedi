@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/company1"
+        android:text="Company"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/colorPrimaryDark"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        />
+    <CheckBox
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:id="@+id/companyCheck"
+        android:layout_height="wrap_content"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/company1"
+        android:background="@color/colorPrimaryDark"
+        />
+</RelativeLayout>

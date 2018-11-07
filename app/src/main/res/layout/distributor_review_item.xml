@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/distributor">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:textSize="11dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Distributor"
+        android:layout_marginRight="36dp"
+        android:id="@+id/dist"
+        />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/dist1"
+        android:layout_below="@+id/dist" >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/highly"
+            android:textSize="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Highly Difficult"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="Difficult"
+            android:id="@+id/difficult" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="Neutral"
+            android:id="@+id/neutral" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:textSize="10dp"
+            android:id="@+id/easy" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Very Easy"
+            android:textSize="10dp"
+            android:id="@+id/very" />
+    </RadioGroup>
+</RelativeLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.medicento.retailerappmedi">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_new_full"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_new_full_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.accountkit.ApplicationName"
+            android:value="@string/app_name" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/fb_app_id" />
+        <meta-data
+            android:name="com.facebook.accountkit.ClientToken"
+            android:value="@string/account_kit_client_token" />
+
+        <activity
+            android:name="com.facebook.accountkit.ui.AccountKitActivity"
+             />
+
+        <meta-data
+            android:name="com.facebook.accountkit.FacebookAppEventsEnabled"
+            android:value="false" />
+
+        <activity
+            android:name=".SalesPersonDetails"
+            android:label="Sales Person Details"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".RecentOrderActivity"
+            android:label="Recent Order"
+            android:parentActivityName=".PlaceOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SignUpActivity"
+            android:label="Place Order"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".PlaceOrderActivity"
+            android:label="Retailer App Medi"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".OrderConfirmed"
+            android:label="Order Confirmed ... "
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".SurveyMedi"
+            android:label="Distributor Review"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".Filter"
+            android:label="Filter"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".Company"
+            android:label="Company/Manufacturer"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".AddToCart"
+            android:label="Your Cart"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".Offers_page"
+            android:label="Offers"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".Medicine_List"
+            android:label="Your Medicine List"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity android:name=".Filter1" />
+
+        <service
+            android:name=".data.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".data.MessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_user" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+
+        <activity android:name=".Register" />
+        <activity android:name=".Success"></activity>
+    </application>
+
+</manifest>

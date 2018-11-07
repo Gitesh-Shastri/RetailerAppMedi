@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="Home">
+        <menu>
+            <item
+                android:id="@+id/about_me"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Profile"/>
+
+            <item
+                android:id="@+id/Recentorder"
+                android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+                android:title="Recent Order"
+                />
+
+            <item
+                android:id="@+id/GoBack1"
+                android:icon="@drawable/ic_home_black_24dp"
+                android:title="Home"
+                />
+            <item
+                android:id="@+id/sign_out"
+                android:icon="@drawable/ic_exit_to_app_black_48dp"
+                android:title="Sign Out" />
+
+    </menu>
+    </item>
+
+</menu>

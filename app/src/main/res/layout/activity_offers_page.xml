@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Offers_page">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:id="@+id/special_offer"
+        android:background="@drawable/border"
+        android:padding="5dp"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Special \n Offer"
+            android:textColor="@color/colorPrimaryDark"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            />
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark" />
+        <TextView
+            android:id="@+id/special_offer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:layout_marginLeft="10dp"
+            android:text="Order Above Rs. 5000 and Get Extra Discount Of 2% on below medicines. \n"
+            />
+    </LinearLayout>
+    <AutoCompleteTextView
+        android:id="@+id/medicine_edit_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:hint="Enter Your Medicine"
+        android:layout_below="@+id/special_offer"
+        android:completionThreshold="1"
+        android:inputType="textPhonetic"
+        android:textColor="@color/colorPrimaryDark" />
+    <Button
+        android:id="@+id/filter1"
+        android:background="@drawable/border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/special_offer"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="5dp"
+        android:drawableLeft="@drawable/ic_filter_list_black_24dp"
+        android:text="Filter"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/medicine_edit_tv2"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/notavailable"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/order_list_scroll" >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ordered_medicines_list2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notavailable"
+        android:text="No Offer Available"
+        android:textColor="@color/colorPrimary"
+        android:layout_above="@+id/cart"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/cart"
+        android:background="@drawable/border_curved"
+        android:text="Add To Cart"
+        android:drawableRight="@drawable/ic_add_shopping_cart_white_36dp"
+        android:paddingRight="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        />
+</RelativeLayout>

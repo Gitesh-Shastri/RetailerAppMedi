@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUpActivity"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:id="@+id/medicento_logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="100dp"
+        app:srcCompat="@drawable/mdlf"
+        />
+    <TextView
+        android:layout_below="@+id/medicento_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:text="SIGN IN"
+        android:textStyle="bold"
+        android:id="@+id/sign_in"
+        android:textColor="@color/colorPrimaryDark"
+        />
+    <TextView
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        android:layout_below="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/pharma"
+        android:layout_height="wrap_content"
+        android:text="Please Enter 4-digit PharmaCode : "
+        android:textColor="@color/colorAccent"
+        />
+
+    <EditText
+        android:background="@drawable/border"
+        android:id="@+id/email_edit_tv"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Pharma Code"
+        android:layout_below="@+id/pharma"
+        android:inputType="number"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <Button
+        android:id="@+id/sign_in_btn"
+        android:layout_width="140dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/email_edit_tv"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/border"
+        android:text="Log In"
+        android:textColor="@color/colorPrimaryDark" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#0000ff"
+        android:text="Forget User Code ?"
+        android:textSize="10dp"
+        android:onClick="view"
+        android:id="@+id/forget"
+        android:layout_marginTop="5dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/sign_in_btn"
+        android:background="#ffffff"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/call"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        android:layout_below="@+id/forget"
+        android:text="Please Call Us : +91 - 8548008190"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/call"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/review"
+        android:text="Please Review Your Distributor : "
+        />
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:onClick="Submit"
+        android:background="@drawable/border"
+        android:text="Rate "
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/review"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:paddingRight="10dp"
+        android:drawableRight="@drawable/stars"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/salesPerson"/>
+
+    <TextView
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:text=" Note :-> Please enter your respective pharma code as this will help invoice generation on you Pharmacy name for GST fillings"
+        />
+</RelativeLayout>
