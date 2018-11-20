@@ -25,7 +25,7 @@ public class ResponseAdapter  extends RecyclerView.Adapter<ResponseAdapter.Distr
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_response, parent, false);
 
-        ResponseAdapter.DistributorViewHolder viewHolder = new DistributorViewHolder(view);
+        DistributorViewHolder viewHolder = new DistributorViewHolder(view);
         return viewHolder;
 
     }

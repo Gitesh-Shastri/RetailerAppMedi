@@ -29,12 +29,12 @@ public class ManufacturerResAdapter extends RecyclerView.Adapter<ManufacturerRes
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.manufacturer, parent, false);
 
-        ManufacturerResAdapter.ManufacturerViewHolder viewHolder = new ManufacturerResAdapter.ManufacturerViewHolder(view);
+        ManufacturerViewHolder viewHolder = new ManufacturerViewHolder(view);
         return viewHolder;
 
     }
     @NonNull
-    public void onBindViewHolder(@NonNull ManufacturerResAdapter.ManufacturerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ManufacturerViewHolder holder, int position) {
         holder.bind(position);
         holder.itemView.setTag(position);
     }

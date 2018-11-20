@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="010001" />
-                            <entry key="outputName" value="ic_home_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\gitesh" />
+                            <entry key="outputName" value="ic_google_plus" />
+                            <entry key="sourceFile" value="C:\Users\gitesh\Downloads\google-plus.svg" />
                           </map>
                         </option>
                       </PersistentState>

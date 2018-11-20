@@ -9,6 +9,7 @@
     android:background="@color/colorBackground">
 
     <ImageView
+        android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:id="@+id/medicento_logo"
@@ -17,120 +18,171 @@
         android:layout_marginLeft="100dp"
         app:srcCompat="@drawable/mdlf"
         />
-    <TextView
-        android:layout_below="@+id/medicento_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginLeft="30dp"
-        android:text="SIGN IN"
-        android:textStyle="bold"
-        android:id="@+id/sign_in"
-        android:textColor="@color/colorPrimaryDark"
-        />
-    <TextView
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:textSize="15dp"
-        android:layout_below="@+id/sign_in"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/pharma"
-        android:layout_height="wrap_content"
-        android:text="Please Enter 4-digit PharmaCode : "
-        android:textColor="@color/colorAccent"
-        />
-
-    <EditText
-        android:background="@drawable/border"
-        android:id="@+id/email_edit_tv"
-        style="@style/Base.TextAppearance.AppCompat.Large"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Pharma Code"
-        android:layout_below="@+id/pharma"
-        android:inputType="number"
+        app:cardElevation="8dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:textColor="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="20dp" />
+        android:layout_below="@id/medicento_logo"
+        android:id="@+id/loginlayout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:text="Pharmacy Login"
+                android:textStyle="bold"
+                android:id="@+id/sign_in"
+                android:background="#DC4E41"
+                android:textColor="#000"
+                />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/pharma"
+                android:layout_height="wrap_content"
+                android:text="Registered 4-digit PharmaCode : "
+                android:textColor="@color/colorAccent"
+                />
+            <EditText
+                android:background="@drawable/border"
+                android:id="@+id/email_edit_tv"
+                style="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Pharma Code"
+                android:inputType="number"
+                android:textColor="@color/colorPrimaryDark"
+                tools:layout_editor_absoluteX="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="#0000ff"
+                android:text="Forget PassCode ?"
+                android:layout_marginLeft="10dp"
+                android:textSize="10dp"
+                android:onClick="view"
+                android:focusable="true"
+                android:id="@+id/forget"
+                android:layout_marginTop="5dp"
+                android:background="#ffffff"
+                />
+            <TextView
+                android:id="@+id/call"
+                android:textSize="10dp"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:gravity="end"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:text="Please Call Us : +91 - 8548008190"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/sign_in_btn"
-        android:layout_width="140dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/email_edit_tv"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/border"
-        android:text="Log In"
-        android:textColor="@color/colorPrimaryDark" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#0000ff"
-        android:text="Forget User Code ?"
-        android:textSize="10dp"
-        android:onClick="view"
-        android:id="@+id/forget"
-        android:layout_marginTop="5dp"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/sign_in_btn"
-        android:background="#ffffff"
-        android:layout_gravity="center"
-        />
-
-    <TextView
-        android:id="@+id/call"
-        android:textSize="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
-        android:visibility="gone"
-        android:layout_below="@+id/forget"
-        android:text="Please Call Us : +91 - 8548008190"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/call"
+        android:layout_width="match_parent"
         android:layout_marginLeft="30dp"
-        android:id="@+id/review"
-        android:text="Please Review Your Distributor : "
-        />
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:onClick="Submit"
-        android:background="@drawable/border"
-        android:text="Rate "
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/review"
-        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:paddingRight="10dp"
-        android:drawableRight="@drawable/stars"
+        android:layout_below="@id/loginlayout"
+        android:layout_height="wrap_content"
+        android:background="#DC4E41"
+        android:text="Log In"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="20sp"
         />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/salesPerson"/>
-
-    <TextView
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#ff0000"
-        android:layout_marginBottom="10dp"
+        android:text="----- OR LOGIN WITH -----"
+        android:layout_below="@id/sign_in_btn"
+        android:gravity="center"
+        android:id="@+id/or"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:id="@+id/social"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/or"
+        >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/ic_facebook_circular_logo"
+        />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/ic_twitter"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/ic_google_plus"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_above="@id/joining"
+        android:layout_toLeftOf="@id/signUp"
+        android:text="Dont have account yet ? "
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signUp"
+        android:text="@string/sign_up"
+        android:layout_above="@id/joining"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:textColor="#0000ff"
+        />
+    <TextView
+        android:id="@+id/joining"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_above="@id/terms"
+        android:text="By joining you agree to Medicento's"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/terms"
+        android:text="Terms of Service"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:text=" Note :-> Please enter your respective pharma code as this will help invoice generation on you Pharmacy name for GST fillings"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="12sp"
         />
 </RelativeLayout>

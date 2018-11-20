@@ -2,7 +2,6 @@ package com.medicento.retailerappmedi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,7 +48,7 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText mEmailEditTv;
-    TextView salesData,call;
+    TextView call;
     String usercode;
     SalesPerson sp;
     AlertDialog alert;
@@ -68,7 +67,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mLogo = findViewById(R.id.medicento_logo);
-        salesData = findViewById(R.id.salesPerson);
         mEmailEditTv = findViewById(R.id.email_edit_tv);
         Button btn = findViewById(R.id.sign_in_btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -133,25 +131,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     editor.putInt(Constants.SALE_PHARMA_RETURNS, sp.getReturn());
                                     editor.putString(Constants.SALE_PHARMA_ALLOCATED_AREA_ID, sp.getAllocatedArea());
                                     editor.apply();
-                                    while(sharedPreferences.getString(Constants.SALE_PERSON_ID,"").equals("")) {
-                                        Log.i("shared1", "1");
-                                        SharedPreferences.Editor editor1 = sharedPreferences.edit();
-                                        editor1.putString(Constants.SALE_PERSON_ID, sp.getId());
-                                        editor1.putString(Constants.SALE_PHAMA_CODE, usercode);
-                                        editor1.putString(Constants.SALE_PHARMAID, sp.getmAllocatedPharmaId());
-                                        editor1.putString(Constants.SALE_PHARMA_NAME, sp.getName());
-                                        editor1.putFloat(Constants.SALE_PHARMA_TOTAL_SALES, sp.getTotalSales());
-                                        editor1.putInt(Constants.SALE_PHARMA_NO_OF_ORDERS, sp.getNoOfOrder());
-                                        editor1.putInt(Constants.SALE_PHARMA_RETURNS, sp.getReturn());
-                                        editor1.putString(Constants.SALE_PHARMA_ALLOCATED_AREA_ID, sp.getAllocatedArea());
-                                        editor1.apply();
-                                    }
                                     Intent intent = new Intent();
-                                    if (getParent() == null) {
-                                        setResult(Activity.RESULT_OK, intent);
-                                    } else {
-                                        getParent().setResult(RESULT_OK);
-                                    }
+                                    setResult(RESULT_OK);
                                     finish();
                                 }
                             },

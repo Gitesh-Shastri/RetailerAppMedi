@@ -25,7 +25,7 @@ public class MakeYourOwnAdapter extends RecyclerView.Adapter<MakeYourOwnAdapter.
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_make_your_own, parent, false);
 
-        MakeYourOwnAdapter.MakeYourOwnViewHolder viewHolder =  new MakeYourOwnViewHolder(view);
+        MakeYourOwnViewHolder viewHolder =  new MakeYourOwnViewHolder(view);
         return viewHolder;
     }
 

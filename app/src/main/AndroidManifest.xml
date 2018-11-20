@@ -46,8 +46,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
-            android:label="Place Order"
-            android:parentActivityName=".PlaceOrderActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".PlaceOrderActivity"
             android:label="Retailer App Medi"
@@ -107,7 +107,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_user" />
+            android:resource="@drawable/ic_launcher_background" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />

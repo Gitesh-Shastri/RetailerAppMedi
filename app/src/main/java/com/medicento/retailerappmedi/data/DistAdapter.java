@@ -26,7 +26,7 @@ public class DistAdapter extends RecyclerView.Adapter<DistAdapter.DistributorVie
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.distributor_review_item, parent, false);
 
-        DistAdapter.DistributorViewHolder viewHolder = new DistributorViewHolder(view);
+        DistributorViewHolder viewHolder = new DistributorViewHolder(view);
         return viewHolder;
 
     }
