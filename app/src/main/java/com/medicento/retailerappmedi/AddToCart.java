@@ -37,6 +37,7 @@ import com.medicento.retailerappmedi.data.MakeYourOwn;
 import com.medicento.retailerappmedi.data.Medicine;
 import com.medicento.retailerappmedi.data.OrderedMedicine;
 import com.medicento.retailerappmedi.data.OrderedMedicineAdapter;
+import com.medicento.retailerappmedi.data.SalesPerson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 import static com.medicento.retailerappmedi.PlaceOrderActivity.mOrderedMedicineAdapter;
 
@@ -71,10 +74,25 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
     ArrayAdapter<String> mMedicineAdapter;
     public static String cost;
 
+    SalesPerson sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
+
+        Paper.init(this);
+
+
+        Gson gson = new Gson();
+
+        String cache = Paper.book().read("user");
+
+        if(cache != null && !cache.isEmpty()) {
+
+            sp = gson.fromJson(cache, SalesPerson.class);
+        }
+
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         place = findViewById(R.id.place);
         mMedicineList = findViewById(R.id.medicine_edit_tv1);
@@ -87,7 +105,6 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
         mOrderedMedicinesListView.setAdapter(mOrderedMedicineAdapter);
         mOrderedMedicineAdapter.setOverallCostChangeListener(this);
         ArrayList<OrderedMedicine> medicinesList = (ArrayList<OrderedMedicine>)getIntent().getSerializableExtra("myList");
-        Gson gson = new Gson();
         String json = mSharedPref.getString("saved", null);
         Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
         MedicineDataList = gson.fromJson(json, type);
@@ -164,7 +181,7 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
                     alert.show();
                     return;
                 } else {
-                    String json = extractJsonFromOrderItemsList(mOrderedMedicineAdapter.getList(), makeYourOwns, mSharedPref.getString(Constants.SALE_PHARMAID, ""), mSharedPref.getString(Constants.SALE_PERSON_ID, ""));
+                    String json = extractJsonFromOrderItemsList(mOrderedMedicineAdapter.getList(), makeYourOwns, sp.getmAllocatedPharmaId(),  sp.getId());
                     new PlaceOrder().execute(json);
                 }
             }

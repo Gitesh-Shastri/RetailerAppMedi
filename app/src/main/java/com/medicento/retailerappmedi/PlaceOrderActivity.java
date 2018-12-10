@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -50,9 +51,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.medicento.retailerappmedi.data.AutoCompleteAdapter;
 import com.medicento.retailerappmedi.data.Constants;
 import com.medicento.retailerappmedi.data.MakeYourOwn;
 import com.medicento.retailerappmedi.data.Medicine;
+import com.medicento.retailerappmedi.data.MedicineAuto;
 import com.medicento.retailerappmedi.data.OrderedMedicine;
 import com.medicento.retailerappmedi.data.OrderedMedicineAdapter;
 import com.medicento.retailerappmedi.data.SalesPerson;
@@ -65,6 +68,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import io.paperdb.Paper;
 
 public class PlaceOrderActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OrderedMedicineAdapter.OverallCostChangeListener{
@@ -95,6 +100,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     ArrayList<String> medicine1;
     public static ArrayList<Medicine> MedicineDataList;
 
+    Boolean isLoading;
+
     Animation mAnimation;
     int TCost;
     private final int uniqueId = 12345;
@@ -102,6 +109,10 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     public static int code;
     ArrayAdapter<String> mMedicineAdapter;
     AlertDialog alert;
+
+    ArrayList<MedicineAuto> medicineAuto;
+
+    AutoCompleteAdapter medicineAdapter;
 
     @Override
     public void onBackPressed() {
@@ -112,6 +123,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        isLoading = false;
+
         notify = findViewById(R.id.notify);
         mMedicineList = (AutoCompleteTextView) findViewById(R.id.medicine_edit_tv);
         pharmacyName = findViewById(R.id.pharmacy_edit_tv);
@@ -127,7 +143,18 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         mOrderedMedicinesListView.setHasFixedSize(true);
         setSupportActionBar(mToolbar);
         Count =0;
+
+        Paper.init(this);
+
         Gson gson = new Gson();
+
+        String cache = Paper.book().read("user");
+
+        if(cache != null && !cache.isEmpty()) {
+
+            sp = gson.fromJson(cache, SalesPerson.class);
+        }
+
         String json = mSharedPreferences.getString("saved", null);
         Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
         MedicineDataList = gson.fromJson(json, type);
@@ -136,11 +163,14 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
             new GetNames().execute();
         } else {
             medicine1 = new ArrayList<>();
+            medicineAuto = new ArrayList<>();
             for(Medicine med: MedicineDataList){
+                medicineAuto.add(new MedicineAuto(med.getMedicentoName(), med.getCompanyName(), med.getPrice()));
                 medicine1.add(med.getMedicentoName());
             }
-            mMedicineAdapter = new ArrayAdapter<String>(PlaceOrderActivity.this, R.layout.support_simple_spinner_dropdown_item,medicine1);
-            mMedicineList.setAdapter(mMedicineAdapter);
+
+            medicineAdapter = new AutoCompleteAdapter(this, medicineAuto);
+            mMedicineList.setAdapter(medicineAdapter);
             mMedicineList.setEnabled(true);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -149,7 +179,14 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         TCost = 0;
-        addSalesPersonDetailsToNavDrawer();
+
+        if(sp != null) {
+            addSalesPersonDetailsToNavDrawer();
+        } else {
+            Intent intent = new Intent(this, SignUpActivity.class);
+            startActivityForResult(intent, Constants.RC_SIGN_IN);
+        }
+
         mOrderedMedicineAdapter = new OrderedMedicineAdapter(new ArrayList<OrderedMedicine>());
         mOrderedMedicinesListView.setAdapter(mOrderedMedicineAdapter);
         mOrderedMedicineAdapter.setOverallCostChangeListener(this);
@@ -176,7 +213,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                 mMedicineList.setText("");
                 Medicine medicine = null;
                 for(Medicine med: MedicineDataList) {
-                    if(med.getMedicentoName().equals(mMedicineAdapter.getItem(position))) {
+                    if(med.getMedicentoName().equals(medicineAdapter.getItem(position).getName())) {
                         medicine = med;
                         break;
                     }
@@ -189,7 +226,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                         medicine.getMstock(),
                         medicine.getCode()));
                 float cost = Float.parseFloat(mTotalTv.getText().toString());
-                mTotalTv.setText(cost+medicine.getPrice()+"");
+                float overall = cost+medicine.getPrice();
+                mTotalTv.setText(getString(R.string.ruppe_symbol)+overall);
                 mOrderedMedicinesListView.smoothScrollToPosition(0);
             }
         });
@@ -219,6 +257,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         if(requestCode == Constants.RC_SIGN_IN) {
             if(resultCode == RESULT_OK) {
                 Toast.makeText(PlaceOrderActivity.this, "Welcome ", Toast.LENGTH_SHORT).show();
+                SalesPerson sp = (SalesPerson)data.getSerializableExtra("salesperosn");
                 mNavigationView = findViewById(R.id.nav_view);
                 addSalesPersonDetailsToNavDrawer();
             } else {
@@ -252,6 +291,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
             }
         } else if(requestCode == 3) {
             if(resultCode == RESULT_OK){
+
                 makeYourOwns = (ArrayList<MakeYourOwn>) data.getSerializableExtra("make");
                 mOrderedMedicineAdapter = new OrderedMedicineAdapter(new ArrayList<OrderedMedicine>());
                 mOrderedMedicinesListView.setAdapter(mOrderedMedicineAdapter);
@@ -264,16 +304,23 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     }
 
     private void addSalesPersonDetailsToNavDrawer() {
+
+        String cache = Paper.book().read("user");
+
+        if(cache != null && !cache.isEmpty()) {
+
+            sp = new Gson().fromJson(cache, SalesPerson.class);
+        }
         mNavigationView = findViewById(R.id.nav_view);
-        mNavigationView.setNavigationItemSelectedListener(this);
-        View headerView = mNavigationView.getHeaderView(0);
-        TextView navHeaderSalesmanName = headerView.findViewById(R.id.username_header);
-        TextView navHeaderSalesmanEmail = headerView.findViewById(R.id.user_email_header);
-        TextView navp = headerView.findViewById(R.id.user_pharmaid);
-        navHeaderSalesmanName.setText(mSharedPreferences.getString(Constants.SALE_PHARMA_NAME, ""));
-        navHeaderSalesmanEmail.setText("pharmacode : " + mSharedPreferences.getString(Constants.SALE_PHAMA_CODE, ""));
-        navp.setText(mSharedPreferences.getString(Constants.SALE_PHARMAID, ""));
-        pharmacyName.setText(mSharedPreferences.getString(Constants.SALE_PHARMA_NAME, ""));
+            mNavigationView.setNavigationItemSelectedListener(this);
+            View headerView = mNavigationView.getHeaderView(0);
+            TextView navHeaderSalesmanName = headerView.findViewById(R.id.username_header);
+            TextView navHeaderSalesmanEmail = headerView.findViewById(R.id.user_email_header);
+            TextView navp = headerView.findViewById(R.id.user_pharmaid);
+            navHeaderSalesmanName.setText(sp.getName());
+            navHeaderSalesmanEmail.setText(getString(R.string.pharmacode) + sp.getUsercode());
+            navp.setText(sp.getName());
+            pharmacyName.setText(sp.getName());
     }
 
     @Override
@@ -281,11 +328,14 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         mTotalTv.setText(newCost + "");
     }
 
-    private class GetNames extends AsyncTask<Void, Void, Void> {
+    private  class GetNames extends AsyncTask<Void, Void, Void> {
+
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
+            isLoading = true;
             pDialog = new ProgressDialog(PlaceOrderActivity.this);
             pDialog.setTitle("Loading Initial Data");
             pDialog.setMessage("Please wait...");
@@ -309,6 +359,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                     // Getting JSON Array node
                     JSONArray medicine = jsonObj.getJSONArray("products");
                     medicine1 = new ArrayList<>();
+                    medicineAuto = new ArrayList<>();
+
                     // looping through All Contacts
                     for (int i = 0; i < medicine.length(); i++) {
                         JSONObject c = medicine.getJSONObject(i);
@@ -320,6 +372,9 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                                 c.getInt("stock"),
                                 c.getString("item_code")
                         ));
+                        medicineAuto.add(new MedicineAuto(c.getString("medicento_name"),
+                                c.getString("company_name"),
+                                c.getInt("price")));
                         medicine1.add(c.getString("medicento_name"));
                     }
                 } catch (final JSONException e) {
@@ -357,18 +412,19 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            /**
-             * Updating parsed JSON data into ListView
-             * */
-            mMedicineAdapter = new ArrayAdapter<String>(PlaceOrderActivity.this, R.layout.support_simple_spinner_dropdown_item,medicine1);
-            mMedicineList.setAdapter(mMedicineAdapter);
+
+            medicineAdapter = new AutoCompleteAdapter(PlaceOrderActivity.this, medicineAuto);
+            mMedicineList.setAdapter(medicineAdapter);
             mMedicineList.setEnabled(true);
+
             Gson gson = new Gson();
             String json = gson.toJson(MedicineDataList);
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putString("saved", json);
             editor.apply();
+
             Toast.makeText(PlaceOrderActivity.this,"Now You Can Choose Medicine", Toast.LENGTH_SHORT).show();
+
             addSalesPersonDetailsToNavDrawer();
         }
 
@@ -386,7 +442,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_proceed) {
-            if(!amIConnect()) {
+            if(!IamConnect()) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
                 builder.setTitle("No Internet Connection");
                 builder.setIcon(R.mipmap.ic_launcher_new);
@@ -444,18 +500,13 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
             clearUserDetails();
             intent = new Intent(this, SignUpActivity.class);
             startActivityForResult(intent, Constants.RC_SIGN_IN);
-        } else if(id == R.id.GoBack1) {
-            intent = new Intent(this, PlaceOrderActivity.class);
-            intent.putExtra("usercode", usercode);
-            intent.putExtra("SalesPerson", sp);
-            startActivity(intent);
-        } else if (id == R.id.about_me) {
+        }  else if (id == R.id.about_me) {
             intent = new Intent(this, SalesPersonDetails.class);
             intent.putExtra("usercode", usercode);
             intent.putExtra("SalesPerson", sp);
             startActivity(intent);
         } else if(id == R.id.Recentorder) {
-            if(!amIConnect()) {
+            if(!IamConnect()) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
                 builder.setTitle("No Internet Connection");
                 builder.setIcon(R.mipmap.ic_launcher_new);
@@ -471,7 +522,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                 alert.show();
             } else {
                 intent = new Intent(this, RecentOrderActivity.class);
-                intent.putExtra("usercode", usercode);
                 intent.putExtra("SalesPerson", sp);
                 startActivity(intent);
             }
@@ -483,15 +533,9 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     }
 
     private void clearUserDetails() {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString(Constants.SALE_PHAMA_CODE, "");
-        editor.putString(Constants.SALE_PHARMA_NAME, "");
-        editor.putFloat(Constants.SALE_PHARMA_TOTAL_SALES, 0);
-        editor.putInt(Constants.SALE_PHARMA_NO_OF_ORDERS, 0);
-        editor.putInt(Constants.SALE_PHARMA_RETURNS, 0);
-        editor.putString(Constants.SALE_PHARMAID, "");
-        editor.putString(Constants.SALE_PHARMA_ALLOCATED_AREA_ID, "");
-        editor.apply();
+
+        Paper.book().delete("user");
+
     }
 
     @Override
@@ -499,7 +543,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         super.onPause();
         timer = new Timer();
         LogOutTimerTask logOutTimerTask = new LogOutTimerTask();
-        timer.schedule(logOutTimerTask, 500000);
+        timer.schedule(logOutTimerTask, 1200000);
     }
 
     @Override
@@ -510,25 +554,16 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     @Override
     protected void onResume() {
         super.onResume();
+
         if(timer != null) {
             timer.cancel();
             timer = null;
         }
+
         FirebaseMessaging.getInstance().subscribeToTopic("all");
-        if(!amIConnect()) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
-            builder.setTitle("No Internet Connection");
-            builder.setIcon(R.mipmap.ic_launcher_new);
-            builder.setCancelable(false);
-            builder.setMessage("Please Connect To The Internet")
-                    .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            alert.dismiss();
-                        }
-                    });
-            alert = builder.create();
-            alert.show();
+
+        if(!IamConnect()) {
+            alertDialogForInternet();
         } else {
             final int[] count1 = new int[1];
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -538,32 +573,17 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                         @Override
                         public void onResponse(String response) {
                             try {
-                                Log.i("Code1", response.toString());
-                                strcode = response.toString();
-                                JSONObject spo = new JSONObject(response.toString());
+                                Log.i("Code1", response);
+                                strcode = response;
+                                JSONObject spo = new JSONObject(response);
                                 JSONArray version = spo.getJSONArray("Version");
                                 for(int i=0;i<version.length();i++){
                                     JSONObject v = version.getJSONObject(i);
                                     versionUpdate = v.getString("version");
                                 }
                                 String versionName = BuildConfig.VERSION_NAME;
-                                if(versionUpdate.equals(versionName)) {
-
-                                } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
-                                    builder.setTitle("update Available");
-                                    builder.setIcon(R.mipmap.ic_launcher_new);
-                                    builder.setCancelable(false);
-                                    builder.setMessage("New Version Available")
-                                            .setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    final String appName = getPackageName();
-                                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.medicento.retailerappmedi")));
-                                                                }
-                                            });
-                                    AlertDialog alert = builder.create();
-                                    alert.show();
+                                if(!versionUpdate.equals(versionName)) {
+                                    alertDialogForUpdate();
                                 }
                                 code = spo.getInt("code");
                                 count1[0] = spo.getInt("count");
@@ -572,11 +592,13 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                                     SharedPreferences.Editor editor = mSharedPreferences.edit();
                                     editor.putInt("count", count1[0] + 1);
                                     editor.apply();
-                                    new GetNames().execute();
-                                    Toast.makeText(PlaceOrderActivity.this, "List Updated", Toast.LENGTH_SHORT).show();
+                                    if(!isLoading) {
+                                        new GetNames().execute();
+                                        Toast.makeText(PlaceOrderActivity.this, "List Updated", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             } catch (JSONException e) {
-                                Log.e("error_coce", e.getMessage().toString());
+                                Log.e("error_coce", e.getMessage());
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -586,25 +608,81 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
             });
             queue.add(str);
         }
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (mSharedPreferences.getString(Constants.SALE_PHARMA_NAME, "").isEmpty()) {
-            Intent intent1 = new Intent(this, SignUpActivity.class);
-            startActivity(intent1);
-        }
-    }
 
-    private class LogOutTimerTask extends TimerTask {
-        @Override
-        public void run() {
-            clearUserDetails();
+        String cache = Paper.book().read("user");
+
+        if(cache == null || cache.isEmpty()) {
             Intent intent = new Intent(PlaceOrderActivity.this, SignUpActivity.class);
             startActivityForResult(intent, Constants.RC_SIGN_IN);
         }
     }
 
-    private boolean amIConnect() {
+
+    private void alertDialogForUpdate() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
+
+        builder.setTitle("update Available");
+        builder.setIcon(R.mipmap.ic_launcher_new);
+        builder.setCancelable(false);
+
+        builder.setMessage("New Version Available")
+                .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(
+                                new Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("https://play.google.com/store/apps/details?id=com.medicento.retailerappmedi"
+                                        )
+                                )
+                        );
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void alertDialogForInternet() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
+
+        builder.setTitle("No Internet Connection");
+        builder.setIcon(R.mipmap.ic_launcher_new);
+        builder.setCancelable(false);
+
+        builder.setMessage("Please Connect To The Internet")
+                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alert.dismiss();
+                    }
+                });
+
+        alert = builder.create();
+        alert.show();
+
+    }
+
+    private class LogOutTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            clearUserDetails();
+            Intent intent = new Intent(PlaceOrderActivity.this, SignUpActivity.class);
+            startActivityForResult(intent, Constants.RC_SIGN_IN);
+
+        }
+    }
+
+    private Boolean IamConnect() {
+
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+
     }
+
 }

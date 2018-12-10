@@ -30,7 +30,6 @@ public class OrderConfirmed extends AppCompatActivity {
         Intent intent = new Intent(OrderConfirmed.this, PlaceOrderActivity.class);
         finish();
         startActivity(intent);
-        super.onBackPressed();
     }
 
     @Override

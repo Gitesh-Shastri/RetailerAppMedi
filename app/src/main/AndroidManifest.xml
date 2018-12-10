@@ -27,9 +27,7 @@
             android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/account_kit_client_token" />
 
-        <activity
-            android:name="com.facebook.accountkit.ui.AccountKitActivity"
-             />
+        <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
 
         <meta-data
             android:name="com.facebook.accountkit.FacebookAppEventsEnabled"
@@ -42,12 +40,10 @@
         <activity
             android:name=".RecentOrderActivity"
             android:label="Recent Order"
-            android:parentActivityName=".PlaceOrderActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".PlaceOrderActivity" />
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlaceOrderActivity"
             android:label="Retailer App Medi"
@@ -112,8 +108,15 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
 
-        <activity android:name=".Register" />
-        <activity android:name=".Success"></activity>
+        <activity
+            android:name=".Register"
+            android:label="Sign Up To Medicento" />
+        <activity android:name=".Success" />
+        <activity
+            android:name=".TermsAndCondition"
+            android:label="Medicento"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity android:name=".RecentOrderDetails" android:label="Order Details" android:parentActivityName=".RecentOrderActivity"/>
     </application>
 
 </manifest>

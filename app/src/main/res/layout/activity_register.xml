@@ -1,58 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
     tools:context=".Register">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Otp Verification"
-        android:id="@+id/number"
-        android:textColor="@color/colorPrimary"
-        android:layout_margin="30dp"
-        style="@style/Base.TextAppearance.AppCompat.Medium"
-        />
-    <EditText
-        android:id="@+id/editTextV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:ems="10"
-        android:layout_below="@id/number"
-        android:hint="Enter Your Number"
-        android:inputType="phone" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextV"
-        android:background="@drawable/border"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Send Sms"
-        android:id="@+id/sms"
-        android:onClick="sendSms"
-        />
-    <EditText
-        android:id="@+id/otp"
-        android:layout_below="@+id/sms"
+        android:id="@+id/text"
+        android:text="@string/pharmacy_registration"
+        android:textColor="@color/colorAccent"
+        android:gravity="center" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:hint="Enter Otp"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@id/agree"
+        android:layout_below="@id/text">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Shop Name *"
+                android:id="@+id/shop_name"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shop_address"
+                android:hint="Adrdess *"
+                />
+
+            <Spinner
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/area_spinner"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/owner_name"
+                android:hint="Owner Name"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone_number"
+                android:hint="Phone Number *"
+                android:inputType="phone"
+                />
+
+            <EditText
+                android:hint="Email Address *"
+                android:id="@+id/email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/drug_license"
+                android:hint="Drug License Number *"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gst_license"
+                android:hint="GST Number *"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/agree"
+        android:layout_above="@+id/termsOfService"
+        android:layout_marginBottom="10dp"
+        android:text="@string/by_clicking_create_account_you_agree_to_the_medicento"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/termsOfService"
+        android:text="@string/terms_of_service"
+        android:gravity="center"
+        android:layout_above="@id/create"
+        android:layout_marginBottom="10dp"
+        android:textColor="#0000ff"
+        android:textSize="12sp" />
+
     <Button
+        android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/otp"
-        android:background="@drawable/border"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Submit"
-        android:id="@+id/verify"
-        android:onClick="verifySms" />
+        android:text="@string/create_account"
+        android:layout_above="@id/login"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:background="@color/official_color"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:text="@string/alreday_have_an_promocode_login_here"
+        android:textColor="#4267b2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="end"
+        />
+
 </RelativeLayout>

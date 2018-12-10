@@ -112,7 +112,7 @@ public class OrderedMedicineAdapter extends RecyclerView.Adapter<OrderedMedicine
             MedName.setText(medicine.getMedicineName());
             MedCompany.setText(medicine.getMedicineCompany());
             MedRate.setText("Billing Rate : ");
-            MedCost.setText(medicine.getCost() + "");
+            MedCost.setText("\u20B9"+medicine.getCost() + "");
             MedQty.setText(medicine.getQty() + "");
             stock.setText("Stock" + medicine.getStock());
         }

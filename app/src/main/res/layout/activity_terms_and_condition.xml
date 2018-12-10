@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:orientation="vertical"
+    tools:context=".TermsAndCondition">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Medicento's Terms of Service"
+        android:textStyle="bold"
+        android:textColor="@color/colorGreen"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:id="@+id/term_date"
+        android:text="Last Updated : Nov 2018"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="Welcome to Medicento.com"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <com.github.barteksc.pdfviewer.PDFView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:id="@+id/terms_pdf"  />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark" />
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_facebook_circular_logo"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/ic_twitter" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/ic_google_plus" />
+    </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

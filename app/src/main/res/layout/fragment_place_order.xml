@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                  />
             <Button
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/notify"
@@ -61,7 +62,7 @@
             android:textColor="@color/colorPrimaryDark" />
         <TextView
             android:id="@+id/order_list_label"
-            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cost_layout"
@@ -87,15 +88,9 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/rupee_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_rupee_symbol" />
-
             <TextView
                 android:id="@+id/total_cost"
-                style="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"

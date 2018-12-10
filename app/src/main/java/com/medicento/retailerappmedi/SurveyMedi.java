@@ -11,25 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.medicento.retailerappmedi.data.Constants;
 import com.medicento.retailerappmedi.data.DistAdapter;
 import com.medicento.retailerappmedi.data.DistributorName;
-import com.medicento.retailerappmedi.data.OrderAdapter;
-import com.medicento.retailerappmedi.data.OrderedMedicine;
-import com.medicento.retailerappmedi.data.OrderedMedicineAdapter;
-import com.medicento.retailerappmedi.data.RecentOrder;
 import com.medicento.retailerappmedi.data.Response;
 import com.medicento.retailerappmedi.data.ResponseAdapter;
 
@@ -46,7 +38,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SurveyMedi extends AppCompatActivity {
     public static EditText q1;

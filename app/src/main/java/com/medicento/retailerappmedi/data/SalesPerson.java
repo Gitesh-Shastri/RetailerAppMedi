@@ -10,8 +10,12 @@ public class SalesPerson implements Serializable{
     private float mEarnings;
     private String mId;
     private String mAllocatedAreaId, mAllocatedPharmaId;
+    private String usercode;
 
-    public SalesPerson(String name, Long totalSales, int noOfOrder, int returns, float earnings, String id, String allocatedAreaId,String pId) {
+    public SalesPerson() {
+    }
+
+    public SalesPerson(String name, Long totalSales, int noOfOrder, int returns, float earnings, String id, String allocatedAreaId, String pId) {
         mName = name;
         mTotalSales = totalSales;
         mNoOfOrder = noOfOrder;
@@ -20,6 +24,14 @@ public class SalesPerson implements Serializable{
         mId = id;
         mAllocatedAreaId = allocatedAreaId;
         mAllocatedPharmaId = pId;
+    }
+
+    public String getUsercode() {
+        return usercode;
+    }
+
+    public void setUsercode(String usercode) {
+        this.usercode = usercode;
     }
 
     public String getName() {

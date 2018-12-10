@@ -1,6 +1,10 @@
 package com.medicento.retailerappmedi.data;
 
 public class Constants {
+
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+
     public static final String USER_LOGIN_URL = "https://medicento-api.herokuapp.com/user/login";
     public static final String MEDICINE_DATA_URL = "https://medicento-api.herokuapp.com/product/medimap";
     public static final String PLACE_ORDER_URL = "https://medicento-api.herokuapp.com/product/order";

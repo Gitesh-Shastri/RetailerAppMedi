@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/relative"
     tools:context=".SignUpActivity"
     android:background="@color/colorBackground">
 
     <ImageView
+        android:contentDescription="@string/medicento_logo"
         android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:id="@+id/medicento_logo"
         android:layout_width="120dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="120dp"
-        android:layout_marginLeft="100dp"
-        app:srcCompat="@drawable/mdlf"
-        />
+        app:srcCompat="@drawable/mdlf" />
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,71 +29,65 @@
         android:layout_marginRight="30dp"
         android:layout_below="@id/medicento_logo"
         android:id="@+id/loginlayout">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
                 android:gravity="center"
-                android:text="Pharmacy Login"
+                android:text="@string/pharmacy_login"
                 android:textStyle="bold"
                 android:id="@+id/sign_in"
-                android:background="#DC4E41"
-                android:textColor="#000"
-                />
+                android:background="#05C5CE"
+                android:textColor="#000" />
+
             <TextView
                 android:layout_marginTop="10dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_marginBottom="5dp"
                 android:id="@+id/pharma"
                 android:layout_height="wrap_content"
-                android:text="Registered 4-digit PharmaCode : "
-                android:textColor="@color/colorAccent"
-                />
+                android:text="@string/registered_4_digit_pharmacode"
+                android:textColor="@color/colorAccent" />
+
             <EditText
                 android:background="@drawable/border"
-                android:id="@+id/email_edit_tv"
-                style="@style/Base.TextAppearance.AppCompat.Large"
+                android:id="@+id/user_code_tv"
+                android:autofillHints="Enter Code "
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"
-                android:hint="Enter Pharma Code"
+                android:hint="@string/enter_pharma_code"
                 android:inputType="number"
                 android:textColor="@color/colorPrimaryDark"
                 tools:layout_editor_absoluteX="20dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:textColor="#0000ff"
-                android:text="Forget PassCode ?"
+                android:text="@string/forget_pharmacode"
                 android:layout_marginLeft="10dp"
-                android:textSize="10dp"
-                android:onClick="view"
+                android:textSize="12sp"
                 android:focusable="true"
                 android:id="@+id/forget"
                 android:layout_marginTop="5dp"
                 android:background="#ffffff"
-                />
-            <TextView
-                android:id="@+id/call"
-                android:textSize="10dp"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:gravity="end"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="5dp"
-                android:text="Please Call Us : +91 - 8548008190"
-                />
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp" />
+
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
     <Button
@@ -101,23 +98,24 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/loginlayout"
         android:layout_height="wrap_content"
-        android:background="#DC4E41"
-        android:text="Log In"
+        android:background="@color/official_color"
+        android:text="@string/log_in"
         android:textColor="#fff"
         android:textStyle="bold"
         android:textSize="20sp"
-        />
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="----- OR LOGIN WITH -----"
+        android:text="@string/or_login_with"
         android:layout_below="@id/sign_in_btn"
         android:gravity="center"
         android:id="@+id/or"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="10dp"
-        />
+        android:layout_marginBottom="8dp" />
+
     <LinearLayout
         android:id="@+id/social"
         android:layout_marginLeft="30dp"
@@ -126,35 +124,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/or"
-        >
-    <ImageView
+        android:layout_below="@+id/or" >
+
+        <ImageView
+        android:contentDescription="facebook"
         android:layout_width="wrap_content"
+            android:id="@+id/facebook_login"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:src="@drawable/ic_facebook_circular_logo"
-        />
+        android:layout_marginStart="30dp" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
+            android:id="@+id/twitter_login"
             android:src="@drawable/ic_twitter"
-            />
+            android:layout_marginStart="70dp" />
+
         <ImageView
+            android:id="@+id/google_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:src="@drawable/ic_google_plus"
-            />
+            android:layout_marginStart="70dp" />
+
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:layout_above="@id/joining"
         android:layout_toLeftOf="@id/signUp"
-        android:text="Dont have account yet ? "
-        />
+        android:text="@string/dont_have_account_yet"
+        android:layout_toStartOf="@id/signUp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -164,25 +171,35 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
         android:textColor="#0000ff"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp" />
+
     <TextView
         android:id="@+id/joining"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_above="@id/terms"
-        android:text="By joining you agree to Medicento's"
+        android:layout_above="@id/termsOfService"
+        android:text="@string/by_joining_you_agree_to_medicento_s"
         />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/terms"
-        android:text="Terms of Service"
+        android:id="@+id/termsOfService"
+        android:text="@string/terms_of_service"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:textSize="12sp"
+        android:textColor="#0000ff"
+        android:textSize="12sp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_sign_up"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
         />
+
 </RelativeLayout>

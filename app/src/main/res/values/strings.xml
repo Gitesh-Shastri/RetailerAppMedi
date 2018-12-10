@@ -59,5 +59,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_up"><u>SIGN UP</u></string>
+    <string name="medicento_logo">Medicento Logo</string>
+    <string name="pharmacy_login">Pharmacy Login</string>
+    <string name="registered_4_digit_pharmacode">Registered 4-digit PharmaCode :</string>
+    <string name="enter_pharma_code">Enter Pharma Code</string>
+    <string name="forget_pharmacode">Forget PharmaCode?</string>
+    <string name="please_call_us_91_8548008190">Please Call Us : +91 - 8548008190</string>
+    <string name="log_in">Log In</string>
+    <string name="or_login_with">----- OR LOGIN WITH -----</string>
+    <string name="dont_have_account_yet">Dont have account yet ?</string>
+    <string name="by_joining_you_agree_to_medicento_s">By joining you agree to Medicento\'s</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="pharmacy_registration">Pharmacy Registration</string>
+    <string name="alreday_have_an_promocode_login_here">Alreday Have an Promocode? Login here</string>
+    <string name="create_account">Create Account</string>
+    <string name="by_clicking_create_account_you_agree_to_the_medicento">By Clicking Create Account, You Agree to the Medicento,</string>
+    <string name="ruppe_symbol">₹</string>
+    <string name="pharmacode">pharmacode :</string>
 
 </resources>

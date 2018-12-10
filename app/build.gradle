@@ -5,15 +5,16 @@ android {
         app_release {
             keyAlias 'myKey'
             keyPassword 'Shastri@1'
-            storeFile file('E:/Desktop/Reatiler App/my_key.keystore')
+            storeFile file('my_key.keystore')
             storePassword 'Shastri@1'
         }
     }
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.medicento.retailerappmedi"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
+
         versionCode 8
         versionName "2.0.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,22 +30,38 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     implementation 'com.facebook.android:account-kit-sdk:4.37.0'
-    implementation 'com.google.firebase:firebase-config:16.1.0'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.google.firebase:firebase-core:16.0.4'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.volley:volley:1.1.0'
-    implementation 'com.android.support:support-v4:27.1.1'
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.google.code.gson:gson:2.8.5'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+
+    implementation 'com.google.firebase:firebase-config:16.1.0'
+
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+
+    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+
     implementation 'com.google.firebase:firebase-auth:16.0.5'
+
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    implementation 'com.android.volley:volley:1.1.1'
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    implementation 'io.paperdb:paperdb:2.6'
+
 }
 apply plugin: 'com.google.gms.google-services'
