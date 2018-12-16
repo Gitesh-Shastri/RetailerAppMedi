@@ -83,7 +83,6 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
 
         Paper.init(this);
 
-
         Gson gson = new Gson();
 
         String cache = Paper.book().read("user");
@@ -92,6 +91,10 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
 
             sp = gson.fromJson(cache, SalesPerson.class);
         }
+
+        sp = (SalesPerson) getIntent().getSerializableExtra("user");
+
+        Log.i("user_id", sp.getmAllocatedPharmaId());
 
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         place = findViewById(R.id.place);
@@ -234,7 +237,7 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
                 alert = builder.create();
                 alert.show();
             } else {
-                String json = extractJsonFromOrderItemsList(mOrderedMedicineAdapter.getList(), makeYourOwns, mSharedPref.getString(Constants.SALE_PHARMAID, ""), mSharedPref.getString(Constants.SALE_PERSON_ID, ""));
+                String json = extractJsonFromOrderItemsList(mOrderedMedicineAdapter.getList(), makeYourOwns, sp.getmAllocatedPharmaId(), sp.getId());
                 new PlaceOrder().execute(json);
             }
         }
@@ -280,8 +283,9 @@ public class AddToCart extends AppCompatActivity implements OrderedMedicineAdapt
         Log.i("orderItems", orderItems.toString());
         return orderItems.toString();
     }
+
     @Override
-    public void onCostChanged(float newCost) {
+    public void onCostChanged(float newCost, String type, int qty) {
         cost = newCost + "";
     }
 

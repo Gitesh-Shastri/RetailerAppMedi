@@ -75,7 +75,7 @@ public class OrderedMedicineAdapter extends RecyclerView.Adapter<OrderedMedicine
         mOverallCost -= cost;
         notifyDataSetChanged();
         notifyDataSetChanged();
-        if (mOverallCostChangeListener != null) mOverallCostChangeListener.onCostChanged(mOverallCost);
+        if (mOverallCostChangeListener != null) mOverallCostChangeListener.onCostChanged(mOverallCost, "sub", mMedicinesList.get(pos).getQty());
         mMedicinesList.remove(pos);
         notifyDataSetChanged();
     }
@@ -137,7 +137,7 @@ public class OrderedMedicineAdapter extends RecyclerView.Adapter<OrderedMedicine
                        med.setStock(stock);
                        mMedicinesList.set(i, med);
                        mOverallCost += med.getRate();
-                       if (mOverallCostChangeListener != null) mOverallCostChangeListener.onCostChanged(mOverallCost);
+                       if (mOverallCostChangeListener != null) mOverallCostChangeListener.onCostChanged(mOverallCost, "add", 1);
                        notifyDataSetChanged();
                        return;
                    }
@@ -151,7 +151,7 @@ public class OrderedMedicineAdapter extends RecyclerView.Adapter<OrderedMedicine
                        stock++;
                        qty--;
                        mOverallCost -= med.getRate();
-                       if (mOverallCostChangeListener != null) mOverallCostChangeListener.onCostChanged(mOverallCost);
+                       if (mOverallCostChangeListener != null) mOverallCostChangeListener.onCostChanged(mOverallCost, "sub", 1);
                        if (qty == 0) {
                            mMedicinesList.remove(i);
                            notifyDataSetChanged();
@@ -176,7 +176,7 @@ public class OrderedMedicineAdapter extends RecyclerView.Adapter<OrderedMedicine
     }
 
     public interface OverallCostChangeListener {
-        void onCostChanged(float newCost);
+        void onCostChanged(float newCost, String type, int qty);
     }
 
 }

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -53,6 +55,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.medicento.retailerappmedi.data.AutoCompleteAdapter;
 import com.medicento.retailerappmedi.data.Constants;
+import com.medicento.retailerappmedi.data.CountDrawable;
 import com.medicento.retailerappmedi.data.MakeYourOwn;
 import com.medicento.retailerappmedi.data.Medicine;
 import com.medicento.retailerappmedi.data.MedicineAuto;
@@ -88,9 +91,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     Toolbar mToolbar;
     Button filter,notify;
 
+
+
     public static OrderedMedicineAdapter mOrderedMedicineAdapter;
-    public static String url = "https://medicento-api.herokuapp.com/product/medimap";
-    public static String url1 = "https://medicento-api.herokuapp.com/pharma/updateApp";
+    public static String url = "https://retailer-app-api.herokuapp.com/product/medimap";
+    public static String url1 = "https://retailer-app-api.herokuapp.com/product/updateApp";
     String versionUpdate;
     private ProgressDialog pDialog;
     LinearLayout mCostLayout;
@@ -99,6 +104,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     public String name,type,content;
     ArrayList<String> medicine1;
     public static ArrayList<Medicine> MedicineDataList;
+
+    Menu menu;
 
     Boolean isLoading;
 
@@ -111,6 +118,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     AlertDialog alert;
 
     ArrayList<MedicineAuto> medicineAuto;
+
+    private static int menu_count = 0;
 
     AutoCompleteAdapter medicineAdapter;
 
@@ -225,10 +234,12 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
                         medicine.getPrice(),
                         medicine.getMstock(),
                         medicine.getCode()));
-                float cost = Float.parseFloat(mTotalTv.getText().toString());
+                float cost = Float.parseFloat(mTotalTv.getText().toString().substring(1));
                 float overall = cost+medicine.getPrice();
                 mTotalTv.setText(getString(R.string.ruppe_symbol)+overall);
                 mOrderedMedicinesListView.smoothScrollToPosition(0);
+                menu_count += 1;
+                setCount(PlaceOrderActivity.this, String.valueOf(menu_count));
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -251,6 +262,35 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         mAnimation.setRepeatMode(Animation.REVERSE);
     }
 
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        this.menu = menu;
+
+        setCount(this, String.valueOf(menu_count));
+        return true;
+    }
+
+
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = menu.findItem(R.id.action_proceed);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.counter);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.counter, badge);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -324,8 +364,17 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
     }
 
     @Override
-    public void onCostChanged(float newCost) {
-        mTotalTv.setText(newCost + "");
+    public void onCostChanged(float newCost, String type, int qty) {
+
+        if(type.equals("add")) {
+            menu_count += qty;
+        } else {
+            menu_count -= qty;
+        }
+
+        setCount(PlaceOrderActivity.this, String.valueOf(menu_count));
+
+        mTotalTv.setText(getString(R.string.ruppe_symbol)+newCost);
     }
 
     private  class GetNames extends AsyncTask<Void, Void, Void> {
@@ -459,6 +508,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
             } else {
                 if (mOrderedMedicineAdapter.getItemCount() > 0) {
                     Intent intent = new Intent(PlaceOrderActivity.this, AddToCart.class);
+                    intent.putExtra("user", sp);
                     intent.putExtra("myList", mOrderedMedicineAdapter.getList());
                     intent.putExtra("make", makeYourOwns);
                     startActivityForResult(intent, 3);
@@ -567,7 +617,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements NavigationV
         } else {
             final int[] count1 = new int[1];
             RequestQueue queue = Volley.newRequestQueue(this);
-            String url = "https://medicento-api.herokuapp.com/pharma/updateApp";
+            String url = "https://retailer-app-api.herokuapp.com/product/updateApp";
             StringRequest str = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override

@@ -1,163 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".SalesPersonDetails">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp"
+        android:background="@color/official_color">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_local_pharmacy_black_24dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher_new"
+            android:id="@+id/image"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Name : "
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/about_me_name"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_code_black_24dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Code : "
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/about_me_code"
-            android:layout_width="wrap_content"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_perm_identity_black_24dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ID : "
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
+            android:gravity="center"
             android:textStyle="bold"
+            android:layout_below="@+id/image"
+            android:text="Medicento Test"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/name"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            android:id="@+id/salesPersonId"
-            />
+    </RelativeLayout>
 
-    </LinearLayout>
-    <LinearLayout
+
+    <android.support.design.card.MaterialCardView
+        android:layout_width="200dp"
+        android:layout_marginTop="120dp"
+        android:id="@+id/card"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Orders"
+                android:id="@+id/total_order_tv"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Sales"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/total_order_tv"
+                android:id="@+id/total_order"
+                android:textColor="@color/official_color"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                />
+
+            <TextView
+                android:drawableLeft="@drawable/ic_rupee_indian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20000"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/total_order_tv"
+                android:textColor="@color/official_color"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                />
+
+
+        </RelativeLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card"
+        android:layout_marginTop="30dp"
+        app:cardElevation="8dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:layout_width="match_parent"
+                android:drawablePadding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:layout_height="wrap_content"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+                />
+
+        <EditText
+            android:drawableLeft="@drawable/ic_person_blue_24dp"
+            android:layout_width="match_parent"
+            android:drawablePadding="15dp"
+            android:inputType="text"
+            android:textSize="13sp"
+            android:maxLines="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_assessment_black_24dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Sales : "
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:hint="Owner Name"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/salesPersonTS"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            />
+            <EditText
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:inputType="phone"
+                android:drawableLeft="@drawable/ic_phone_in_talk_black_24dp"
+                android:layout_width="match_parent"
+                android:drawablePadding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:hint="Contact No"
+                />
 
-    </LinearLayout>
-    <LinearLayout
+            <EditText
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:inputType="phone"
+                android:drawableLeft="@drawable/ic_place_black_24dp"
+                android:layout_width="match_parent"
+                android:drawablePadding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                />
+
+        </LinearLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_shopping_cart_black_24dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Of Orders : "
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
+        android:layout_height="wrap_content"
+        android:text="Edit Details"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/official_color"
+        android:paddingRight="50dp"
+        android:drawableRight="@drawable/ic_border_color_black_24dp"
+        android:layout_alignParentBottom="true"
+        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/salesPersonNO"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_compare_arrows_black_24dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Returns : "
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/salesPersonR"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

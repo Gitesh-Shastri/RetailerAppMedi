@@ -36,6 +36,7 @@
         <activity
             android:name=".SalesPersonDetails"
             android:label="Sales Person Details"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".PlaceOrderActivity" />
         <activity
             android:name=".RecentOrderActivity"

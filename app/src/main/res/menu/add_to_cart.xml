@@ -6,6 +6,6 @@
         android:orderInCategory="10"
         android:title="Place Order"
         app:showAsAction="always"
-        android:icon="@drawable/ic_add_shopping_cart_white_36dp"
+        android:icon="@drawable/counter"
         />
 </menu>

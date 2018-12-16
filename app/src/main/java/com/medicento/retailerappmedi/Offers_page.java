@@ -152,7 +152,7 @@ public class Offers_page extends AppCompatActivity implements  OrderedMedicineAd
     }
 
     @Override
-    public void onCostChanged(float newCost) {
+    public void onCostChanged(float newCost, String type, int qty) {
 
     }
 
